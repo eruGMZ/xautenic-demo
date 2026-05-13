@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Xautenic Demo Operativa</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand-block">
+        <p class="brand-kicker">Xautenic</p>
+        <h1>Centro Operativo</h1>
+        <p class="brand-copy">Hotel + Eventos en un mismo flujo.</p>
+      </div>
+
+      <nav id="main-nav" class="nav-links" aria-label="Navegacion principal">
+        <a href="#/dashboard" data-route="dashboard">Dashboard</a>
+        <a href="#/eventos" data-route="eventos">Eventos</a>
+        <a href="#/control" data-route="control">Control interno</a>
+        <a href="#/integracion" data-route="integracion">Integracion Zavia</a>
+        <a href="#/finanzas" data-route="finanzas">Finanzas</a>
+      </nav>
+
+      <div class="sidebar-note">
+        <h2>Demo conceptual</h2>
+        <p>Sin backend y sin reemplazar sistemas actuales.</p>
+      </div>
+    </aside>
+
+    <main class="content-area">
+      <header class="topbar">
+        <div>
+          <p class="topbar-label">Operacion del dia</p>
+          <h2 id="view-title">Dashboard</h2>
+        </div>
+        <button id="today-btn" class="action-btn" type="button">12 mayo 2026</button>
+      </header>
+
+      <section id="app-view" class="view-container" aria-live="polite"></section>
+    </main>
+  </div>
+
+  <template id="metric-card-template">
+    <article class="metric-card reveal">
+      <p class="metric-label"></p>
+      <p class="metric-value"></p>
+      <p class="metric-foot"></p>
+    </article>
+  </template>
+
+  <script src="app.js"></script>
+</body>
+</html>
