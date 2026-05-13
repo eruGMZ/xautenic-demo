@@ -17,6 +17,7 @@ lerna-debug.log*
 # Build
 dist/
 build/
+out/
 .out/
 .next/
 .nuxt/
@@ -33,4 +34,4 @@ coverage/
 
 # System
 .DS_Store
-Thumbs.db   
+Thumbs.db

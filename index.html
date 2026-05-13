@@ -38,7 +38,22 @@
           <p class="topbar-label">Operacion del dia</p>
           <h2 id="view-title">Dashboard</h2>
         </div>
-        <button id="today-btn" class="action-btn" type="button">12 mayo 2026</button>
+        <div class="topbar-actions">
+          <div class="notif-wrap">
+            <button id="notif-btn" class="notif-bell" type="button" aria-label="Notificaciones">
+              🔔 <span class="notif-badge" id="notif-badge">3</span>
+            </button>
+            <div id="notif-dropdown" class="notif-dropdown hidden">
+              <p class="notif-title">Alertas operativas</p>
+              <ul>
+                <li class="notif-item danger">Revision de habitaciones bloqueadas sin cerrar</li>
+                <li class="notif-item warn">Ajuste de personal nocturno pendiente de aprobacion</li>
+                <li class="notif-item warn">Montaje audiovisual Salon Cumbre en curso</li>
+              </ul>
+            </div>
+          </div>
+          <button id="today-btn" class="action-btn" type="button"></button>
+        </div>
       </header>
 
       <section id="app-view" class="view-container" aria-live="polite"></section>
@@ -52,6 +67,13 @@
       <p class="metric-foot"></p>
     </article>
   </template>
+
+  <div id="modal-overlay" class="modal-overlay hidden" role="dialog" aria-modal="true">
+    <div class="modal">
+      <button class="modal-close" id="modal-close" type="button" aria-label="Cerrar">✕</button>
+      <div id="modal-content"></div>
+    </div>
+  </div>
 
   <script src="app.js"></script>
 </body>

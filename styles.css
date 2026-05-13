@@ -19,21 +19,23 @@
   box-sizing: border-box;
 }
 
+html,
 body {
   margin: 0;
+  height: 100%;
+  overflow: hidden;
   font-family: 'IBM Plex Sans', sans-serif;
   color: var(--text);
   background:
     radial-gradient(circle at 8% 10%, #1e3a8a 0%, transparent 35%),
     radial-gradient(circle at 90% 80%, #0f766e 0%, transparent 30%),
     linear-gradient(135deg, #0f172a 0%, #111827 45%, #1f2937 100%);
-  min-height: 100vh;
 }
 
 .app-shell {
   display: grid;
   grid-template-columns: 320px 1fr;
-  min-height: 100vh;
+  height: 100%;
 }
 
 .sidebar {
@@ -42,6 +44,7 @@ body {
   background: rgba(15, 23, 42, 0.72);
   backdrop-filter: blur(8px);
   color: #e2e8f0;
+  overflow-y: auto;
 }
 
 .brand-kicker {
@@ -105,6 +108,9 @@ body {
 
 .content-area {
   padding: 26px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
 
 .topbar {
@@ -143,7 +149,9 @@ body {
   border-radius: var(--radius);
   box-shadow: var(--shadow);
   padding: 20px;
-  min-height: calc(100vh - 110px);
+  flex: 1;
+  overflow-y: auto;
+  min-height: 0;
 }
 
 .grid-4,
@@ -297,9 +305,245 @@ body {
   }
 }
 
+/* ── Topbar actions ── */
+.topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* ── Notification bell ── */
+.notif-wrap {
+  position: relative;
+}
+
+.notif-bell {
+  position: relative;
+  background: rgba(148, 163, 184, 0.15);
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  border-radius: 999px;
+  padding: 8px 14px;
+  font-size: 1rem;
+  cursor: pointer;
+  color: #f8fafc;
+}
+
+.notif-badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  background: #ef4444;
+  color: #fff;
+  font-size: 0.65rem;
+  font-weight: 700;
+  border-radius: 999px;
+  padding: 1px 5px;
+  line-height: 1.4;
+}
+
+.notif-dropdown {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  width: 300px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 20px 40px rgba(15, 23, 42, 0.25);
+  z-index: 200;
+  overflow: hidden;
+}
+
+.notif-dropdown.hidden {
+  display: none;
+}
+
+.notif-title {
+  margin: 0;
+  padding: 12px 16px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-soft);
+  border-bottom: 1px solid var(--line);
+}
+
+.notif-dropdown ul {
+  margin: 0;
+  padding: 8px 0;
+  list-style: none;
+}
+
+.notif-item {
+  padding: 10px 16px;
+  font-size: 0.88rem;
+  border-left: 3px solid transparent;
+  color: var(--text);
+  line-height: 1.4;
+}
+
+.notif-item.danger { border-left-color: var(--danger); background: #fff5f5; }
+.notif-item.warn   { border-left-color: var(--warn);   background: #fff8f0; }
+
+/* ── Modal ── */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.65);
+  backdrop-filter: blur(4px);
+  z-index: 300;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.modal-overlay.hidden {
+  display: none;
+}
+
+.modal {
+  background: #fff;
+  border-radius: 20px;
+  width: 100%;
+  max-width: 900px;
+  max-height: 85vh;
+  overflow-y: auto;
+  padding: 28px;
+  position: relative;
+  box-shadow: 0 30px 60px rgba(15, 23, 42, 0.3);
+}
+
+.modal-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: var(--panel-alt);
+  border: none;
+  border-radius: 999px;
+  width: 32px;
+  height: 32px;
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-soft);
+}
+
+.modal-close:hover {
+  background: var(--line);
+}
+
+.modal-kicker {
+  display: block;
+  text-transform: uppercase;
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 16px;
+}
+
+.modal-header h3 {
+  margin: 4px 0;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.4rem;
+}
+
+.modal-header p {
+  margin: 0;
+  color: var(--text-soft);
+  font-size: 0.9rem;
+}
+
+.modal-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.modal-section h4 {
+  margin: 0 0 10px;
+  font-family: 'Space Grotesk', sans-serif;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+/* ── Filter bar ── */
+.filter-bar {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+.filter-btn {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 6px 16px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  background: #fff;
+  color: var(--text-soft);
+  cursor: pointer;
+  transition: 150ms ease;
+}
+
+.filter-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.filter-btn.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+/* ── Progress bar ── */
+.progress-wrap {
+  height: 8px;
+  background: var(--line);
+  border-radius: 999px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #0f766e, #5eead4);
+  border-radius: 999px;
+  transition: width 600ms ease;
+}
+
+.badge-lg {
+  padding: 6px 14px;
+  font-size: 0.85rem;
+  white-space: nowrap;
+}
+
 @media (max-width: 1080px) {
   .app-shell {
     grid-template-columns: 1fr;
+    height: auto;
+    overflow: auto;
+  }
+
+  body,
+  html {
+    overflow: auto;
   }
 
   .sidebar {
@@ -322,6 +566,7 @@ body {
   }
 
   .view-container {
-    min-height: auto;
+    flex: none;
+    overflow-y: visible;
   }
 }

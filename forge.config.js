@@ -9,7 +9,10 @@ module.exports = {
   makers: [
     {
       name: '@electron-forge/maker-squirrel',
-      config: {},
+      config: {
+        authors: 'Xautenic',
+        description: 'Demo operativa Hotel + Eventos',
+      },
     },
     {
       name: '@electron-forge/maker-zip',

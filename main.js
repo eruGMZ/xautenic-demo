@@ -1,6 +1,9 @@
 const { app, BrowserWindow } = require('electron');
 const path = require('path');
 
+// Maneja eventos de instalacion/desinstalacion de Squirrel en Windows
+if (require('electron-squirrel-startup')) app.quit();
+
 app.disableHardwareAcceleration();
 
 function createWindow() {
