@@ -2,7 +2,13 @@ const { app, BrowserWindow } = require('electron');
 const path = require('path');
 
 // Maneja eventos de instalacion/desinstalacion de Squirrel en Windows
-if (require('electron-squirrel-startup')) app.quit();
+if (process.platform === 'win32') {
+  try {
+    if (require('electron-squirrel-startup')) app.quit();
+  } catch {
+    // En Linux/macOS o entornos sin el paquete, se ignora.
+  }
+}
 
 app.disableHardwareAcceleration();
 
